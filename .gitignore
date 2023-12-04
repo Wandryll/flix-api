@@ -2,3 +2,6 @@
 venv
 *.sqlite3
 __pycache__/
+
+# Arquivos de Migração do Django
+**/migrations/
