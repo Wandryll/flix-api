@@ -3,8 +3,10 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 from movies.models import Movie
 
+import uuid
 
 class Review(models.Model):
+    id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
     movie = models.ForeignKey(Movie, on_delete=models.PROTECT, related_name='reviews')
     stars = models.IntegerField(validators=[
         MinValueValidator(0, 'A avaliação não pode ser inferior a 0 estrelas.'),
@@ -14,3 +16,6 @@ class Review(models.Model):
     
     def __str__(self):
         return self.movie
+    
+    class Meta:
+        db_table = 'reviews'
